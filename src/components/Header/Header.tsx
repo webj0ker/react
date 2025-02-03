@@ -1,10 +1,18 @@
 import { Component } from 'react';
+import SearchBar from '../SearchBar';
 
-class Header extends Component {
+interface HeaderProps {
+  onSearch: (searchTerm: string) => void;
+}
+
+class Header extends Component<HeaderProps> {
   render() {
     return (
       <header>
         <h1>Pokemon Search</h1>
+        <div className="search-bar">
+          <SearchBar onSearch={this.props.onSearch} />
+        </div>
       </header>
     );
   }

@@ -10,6 +10,10 @@ class App extends Component {
     loading: false,
   };
 
+  componentDidMount() {
+    this.handleSearch('');
+  }
+
   handleSearch = (searchTerm: string) => {
     this.setState({ loading: true, error: null });
 
@@ -42,7 +46,7 @@ class App extends Component {
 
     return (
       <div>
-        <Header />
+        <Header onSearch={this.handleSearch} />
         <Results
           results={results}
           error={error}

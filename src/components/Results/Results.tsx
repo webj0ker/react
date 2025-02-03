@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import SearchBar from '../SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Spinner from '../Spinner/Spinner';
 
@@ -13,11 +12,10 @@ interface ResultsProps {
 
 class Results extends Component<ResultsProps> {
   render() {
-    const { results, error, loading, onSearch, throwError } = this.props;
+    const { results, error, loading, throwError } = this.props;
 
     return (
       <main>
-        <SearchBar onSearch={onSearch} />
         {loading ? (
           <Spinner />
         ) : (
