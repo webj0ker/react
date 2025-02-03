@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
+import Spinner from './components/Spinner/Spinner';
 import './App.css';
 
 class App extends Component {
@@ -43,7 +44,7 @@ class App extends Component {
       <div>
         <SearchBar onSearch={this.handleSearch} />
         {loading ? (
-          <div>Loading...</div>
+          <Spinner />
         ) : (
           <SearchResults results={results} error={error} />
         )}
