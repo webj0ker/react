@@ -3,8 +3,19 @@ import Header from './components/Header/Header';
 import Results from './components/Results/Results';
 import './App.css';
 
-class App extends Component {
-  state = {
+interface Spell {
+  name: string;
+  description?: string;
+}
+
+interface AppState {
+  results: Spell[];
+  error?: string;
+  loading: boolean;
+}
+
+class App extends Component<object, AppState> {
+  state: AppState = {
     results: [],
     error: undefined,
     loading: false,
@@ -15,7 +26,7 @@ class App extends Component {
   }
 
   handleSearch = (searchTerm: string) => {
-    this.setState({ loading: true, error: null });
+    this.setState({ loading: true, error: undefined });
 
     const apiUrl = searchTerm
       ? `https://hp-api.onrender.com/api/spells?name=${searchTerm.toLowerCase()}`
@@ -28,9 +39,9 @@ class App extends Component {
         }
         return response.json();
       })
-      .then((data) => {
+      .then((data: Spell[]) => {
         const results = searchTerm
-          ? data.filter((spell: any) =>
+          ? data.filter((spell) =>
               spell.name.toLowerCase().includes(searchTerm.toLowerCase())
             )
           : data;
