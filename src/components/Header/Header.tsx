@@ -9,7 +9,7 @@ class Header extends Component<HeaderProps> {
   render() {
     return (
       <header>
-        <h1>Pokemon Search</h1>
+        <h1>Harry Potter all spells</h1>
         <div className="search-bar">
           <SearchBar onSearch={this.props.onSearch} />
         </div>

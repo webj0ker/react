@@ -2,17 +2,17 @@ import { Component } from 'react';
 
 interface CardProps {
   name: string;
-  url?: string;
+  description?: string;
 }
 
 class Card extends Component<CardProps> {
   render() {
-    const { name, url } = this.props;
+    const { name, description } = this.props;
 
     return (
       <div className="card">
         <h3>{name}</h3>
-        {url && <p>URL: {url}</p>}
+        {description && <p>{description}</p>}
       </div>
     );
   }

@@ -18,8 +18,8 @@ class App extends Component {
     this.setState({ loading: true, error: null });
 
     const apiUrl = searchTerm
-      ? `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`
-      : 'https://pokeapi.co/api/v2/pokemon?limit=10';
+      ? `https://hp-api.onrender.com/api/spells?name=${searchTerm.toLowerCase()}`
+      : 'https://hp-api.onrender.com/api/spells';
 
     fetch(apiUrl)
       .then((response) => {
@@ -29,7 +29,11 @@ class App extends Component {
         return response.json();
       })
       .then((data) => {
-        const results = searchTerm ? [data] : data.results;
+        const results = searchTerm
+          ? data.filter((spell: any) =>
+              spell.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          : data;
         this.setState({ results, loading: false });
       })
       .catch((error) => {
@@ -38,7 +42,9 @@ class App extends Component {
   };
 
   throwError = () => {
-    throw new Error('Test error');
+    this.setState(() => {
+      throw new Error('Test error');
+    });
   };
 
   render() {
@@ -51,7 +57,6 @@ class App extends Component {
           results={results}
           error={error}
           loading={loading}
-          onSearch={this.handleSearch}
           throwError={this.throwError}
         />
       </div>

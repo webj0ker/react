@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './SearchBar.css';
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void;
@@ -27,7 +28,9 @@ class SearchBar extends Component<SearchBarProps> {
           value={this.state.searchTerm}
           onChange={this.handleInputChange}
         />
-        <button onClick={this.handleSearch}>Search</button>
+        <button className="search-button" onClick={this.handleSearch}>
+          Search
+        </button>
       </div>
     );
   }
