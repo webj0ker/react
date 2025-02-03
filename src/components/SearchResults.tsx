@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 interface SearchResultsProps {
-  results: { name: string; description: string }[];
+  results: { name: string; url?: string }[];
   error?: string;
 }
 
@@ -15,10 +15,10 @@ class SearchResults extends Component<SearchResultsProps> {
 
     return (
       <div>
-        {results.map((result: any, index: number) => (
+        {results.map((result, index) => (
           <div key={index}>
             <h3>{result.name}</h3>
-            <p>{result.description}</p>
+            {result.url && <p>URL: {result.url}</p>}
           </div>
         ))}
       </div>

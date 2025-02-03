@@ -15,8 +15,8 @@ class App extends Component {
     this.setState({ loading: true, error: null });
 
     const apiUrl = searchTerm
-      ? `https://api.example.com/search?query=${searchTerm}`
-      : 'https://api.example.com/items';
+      ? `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`
+      : 'https://pokeapi.co/api/v2/pokemon?limit=10';
 
     fetch(apiUrl)
       .then((response) => {
@@ -26,7 +26,8 @@ class App extends Component {
         return response.json();
       })
       .then((data) => {
-        this.setState({ results: data.items, loading: false });
+        const results = searchTerm ? [data] : data.results;
+        this.setState({ results, loading: false });
       })
       .catch((error) => {
         this.setState({ error: error.message || undefined, loading: false });
