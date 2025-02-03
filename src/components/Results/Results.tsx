@@ -10,35 +10,9 @@ interface ResultsProps {
   throwError: () => void;
 }
 
-interface ResultsState {
-  hasError: boolean;
-}
-
-class Results extends Component<ResultsProps, ResultsState> {
-  state: ResultsState = {
-    hasError: false,
-  };
-
-  handleThrowError = () => {
-    this.setState({ hasError: true });
-  };
-
-  handleGoBack = () => {
-    this.setState({ hasError: false });
-  };
-
+class Results extends Component<ResultsProps> {
   render() {
-    const { results, error, loading } = this.props;
-    const { hasError } = this.state;
-
-    if (hasError) {
-      return (
-        <div>
-          <p>Something went wrong. Please try again later.</p>
-          <button onClick={this.handleGoBack}>Go Back</button>
-        </div>
-      );
-    }
+    const { results, error, loading, throwError } = this.props;
 
     return (
       <main>
@@ -47,7 +21,7 @@ class Results extends Component<ResultsProps, ResultsState> {
         ) : (
           <SearchResults results={results} error={error} />
         )}
-        <button className="throw-error-button" onClick={this.handleThrowError}>
+        <button className="throw-error-button" onClick={throwError}>
           Throw Error
         </button>
       </main>

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Header from './components/Header/Header';
 import Results from './components/Results/Results';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import './App.css';
 
 interface Spell {
@@ -62,15 +63,17 @@ class App extends Component<object, AppState> {
     const { results, error, loading } = this.state;
 
     return (
-      <div>
-        <Header onSearch={this.handleSearch} />
-        <Results
-          results={results}
-          error={error}
-          loading={loading}
-          throwError={this.throwError}
-        />
-      </div>
+      <ErrorBoundary>
+        <div>
+          <Header onSearch={this.handleSearch} />
+          <Results
+            results={results}
+            error={error}
+            loading={loading}
+            throwError={this.throwError}
+          />
+        </div>
+      </ErrorBoundary>
     );
   }
 }
