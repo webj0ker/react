@@ -6,14 +6,13 @@ import './App.css';
 class App extends Component {
   state = {
     results: [],
-    error: null,
+    error: undefined,
     loading: false,
   };
 
   handleSearch = (searchTerm: string) => {
     this.setState({ loading: true, error: null });
 
-    // Замените URL на ваш API
     const apiUrl = searchTerm
       ? `https://api.example.com/search?query=${searchTerm}`
       : 'https://api.example.com/items';
@@ -29,8 +28,12 @@ class App extends Component {
         this.setState({ results: data.items, loading: false });
       })
       .catch((error) => {
-        this.setState({ error: error.message, loading: false });
+        this.setState({ error: error.message || undefined, loading: false });
       });
+  };
+
+  throwError = () => {
+    throw new Error('Test error');
   };
 
   render() {
@@ -42,8 +45,9 @@ class App extends Component {
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <SearchResults results={results} error={error || undefined} />
+          <SearchResults results={results} error={error} />
         )}
+        <button onClick={this.throwError}>Throw Error</button>
       </div>
     );
   }
