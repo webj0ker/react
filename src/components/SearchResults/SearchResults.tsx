@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import CardList from '../CardList/CardList';
 
 interface SearchResultsProps {
   results: { name: string; url?: string }[];
@@ -13,16 +14,7 @@ class SearchResults extends Component<SearchResultsProps> {
       return <div>Error: {error}</div>;
     }
 
-    return (
-      <div>
-        {results.map((result, index) => (
-          <div key={index}>
-            <h3>{result.name}</h3>
-            {result.url && <p>URL: {result.url}</p>}
-          </div>
-        ))}
-      </div>
-    );
+    return <CardList results={results} />;
   }
 }
 
